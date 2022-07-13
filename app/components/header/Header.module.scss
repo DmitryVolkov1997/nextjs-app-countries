@@ -1,0 +1,11 @@
+.header {
+  @apply min-h-[70px] w-full fixed top-0 left-0 right-0 bg-dark-gray shadow
+}
+
+.row {
+  @apply flex items-center justify-between min-h-[70px]
+}
+
+.logo {
+  @apply font-bold
+}

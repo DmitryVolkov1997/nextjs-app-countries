@@ -1,0 +1,27 @@
+.card {
+  @apply max-w-[320px] md:max-w-4xl shadow shadow-md overflow-hidden rounded-xl cursor-pointer
+}
+
+.img {
+  @apply w-full;
+
+  span {
+    @apply w-full;
+
+    img {
+      @apply w-full;
+    }
+  }
+}
+
+.info {
+  @apply p-4 pt-2 text-base
+}
+
+.title {
+  @apply font-bold mb-2
+}
+
+.strong {
+  @apply font-bold
+}

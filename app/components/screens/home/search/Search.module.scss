@@ -1,0 +1,11 @@
+.label {
+  @apply h-[45px] flex items-center bg-dark-gray shadow pl-3 rounded md:w-[400px]
+}
+
+.icon {
+  @apply text-gray-400
+}
+
+.input {
+  @apply bg-transparent outline-none ml-4 text-sm placeholder:text-gray-400 w-full pr-2
+}
