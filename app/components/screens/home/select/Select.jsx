@@ -1,5 +1,6 @@
 import Select from 'react-select'
 import classes from './Select.module.scss'
+import { useState } from 'react'
 
 const options = [
 	{ value: 'Africa', label: 'Africa' },
@@ -23,14 +24,14 @@ const customStyles = {
 		cursor: 'pointer',
 		padding: '10px',
 		color: 'hsl(200, 15%, 8%)',
-		background: 'hsl(0, 0%, 100%)',
+		background: 'hsl(0, 0%, 100%)'
 	})
 }
 
-const CustomSelect = () => {
+const CustomSelect = ({setRegion}) => {
 	return (
-		<Select className={classes.select} options={options} styles={customStyles} width='200px'
-		        placeholder={'Filter by region'} />
+		<Select instanceId='selectbox' className={classes.select} options={options} styles={customStyles} width='200px'
+		        placeholder={'Filter by region'} onChange={setRegion} />
 	)
 }
 

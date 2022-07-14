@@ -6,31 +6,57 @@ import { useEffect } from 'react'
 import axios from 'axios'
 import { ALL_COUNTRIES } from '../../../config'
 import { useDispatch, useSelector } from 'react-redux'
-import { setCountries } from '../../../store/countriesSlice/countriesSlice'
+import { setCountries, setFilteredCountries } from '../../../store/countriesSlice/countriesSlice'
 import ListCountries from './list-countries/ListCountries'
-
+import { useState } from 'react'
 
 const Home = () => {
 	const dispatch = useDispatch()
-	const { countries } = useSelector(state => state.countries)
+	const { countries, filteredCountries } = useSelector(state => state.countries)
+	const { search } = useSelector(state => state.search)
+	const [region, setRegion] = useState('')
+	
+	const handleSearch = (search, region) => {
+		let data = [...countries]
+		if (search) {
+			data = data.filter(country => country.name.toLowerCase().includes(search.toLowerCase()))
+		}
+		
+		if (region) {
+			data = data.filter(country => country.region.includes(region))
+		}
+		dispatch(setFilteredCountries({ data }))
+	}
 	
 	useEffect(() => {
-		const fetchData = async () => {
-			const { data } = await axios.get(ALL_COUNTRIES)
-			dispatch(setCountries({ data }))
+		if (!countries.length) {
+			const fetchData = async () => {
+				const { data } = await axios.get(ALL_COUNTRIES)
+				dispatch(setCountries({ data }))
+			}
+			fetchData()
 		}
-		fetchData()
 	}, [])
+	
+	useEffect(() => {
+		handleSearch()
+	}, [countries])
+	
+	useEffect(() => {
+		const regionValue = region?.value || ''
+		handleSearch(search, regionValue)
+	}, [search, region])
+	
 	
 	return (
 		<div className={classes.main}>
 			<Container>
 				<div className={classes.filter}>
-					<Search />
-					<CustomSelect />
+					<Search onSearch={handleSearch} />
+					<CustomSelect setRegion={setRegion} />
 				</div>
 				<div className={classes.content}>
-					{countries.length ? <ListCountries countries={countries}/>: <h1>Ничего нет</h1>}
+					{filteredCountries.length ? <ListCountries countries={filteredCountries} /> : <h1>Ничего нет</h1>}
 				</div>
 			</Container>
 		</div>

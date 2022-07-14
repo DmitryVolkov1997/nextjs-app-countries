@@ -3,12 +3,13 @@ import { GoSearch } from 'react-icons/go'
 import { useDispatch, useSelector } from 'react-redux'
 import { setSearch } from '../../../../store/searchSlice/searchSlice'
 
-const Search = () => {
+const Search = ({onSearch}) => {
 	const dispatch = useDispatch()
 	const { search } = useSelector(state => state.search)
 	
 	const handleSearch = (e) => {
 		dispatch(setSearch({ search: e.target.value }))
+		onSearch(e.target.value)
 	}
 	
 	return (
