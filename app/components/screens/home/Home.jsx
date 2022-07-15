@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCountries, setFilteredCountries } from '../../../store/countriesSlice/countriesSlice'
 import ListCountries from './list-countries/ListCountries'
 import { useState } from 'react'
+import { TailSpin } from 'react-loader-spinner'
 
 const Home = () => {
 	const dispatch = useDispatch()
@@ -56,7 +57,8 @@ const Home = () => {
 					<CustomSelect setRegion={setRegion} />
 				</div>
 				<div className={classes.content}>
-					{filteredCountries.length ? <ListCountries countries={filteredCountries} /> : <h1>Ничего нет</h1>}
+					{filteredCountries.length ? <ListCountries countries={filteredCountries} /> :
+						<div className={classes.preloader}><TailSpin color='#00BFFF' height={80} width={80} /></div>}
 				</div>
 			</Container>
 		</div>

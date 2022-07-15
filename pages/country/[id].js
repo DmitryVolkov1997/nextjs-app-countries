@@ -1,10 +1,13 @@
 import axios from 'axios'
-import { ALL_COUNTRIES, filterByName } from '../../app/config'
+import { ALL_COUNTRIES, filterByCodes } from '../../app/config'
 import classes from './Details.module.scss'
 import Container from '../../app/components/container/Container'
 import { MdOutlineKeyboardBackspace } from 'react-icons/md'
 import Info from '../../app/components/screens/home/detail-info/Info'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { setNeighbors } from '../../app/store/neighborsSlice/neighborsSlice'
 
 export const getStaticPaths = async () => {
 	const { data } = await axios.get(ALL_COUNTRIES)
@@ -29,6 +32,19 @@ export const getStaticProps = async (context) => {
 
 const Details = ({ data }) => {
 	const router = useRouter()
+	const dispatch = useDispatch()
+	const { neighbors } = useSelector(state => state.neighbors)
+	const { borders = [] } = data
+	
+	useEffect(() => {
+		if (borders.length) {
+			const fetchData = async () => {
+				const { data } = await axios.get(filterByCodes(borders))
+				dispatch(setNeighbors({ data }))
+			}
+			fetchData()
+		}
+	}, [borders])
 	
 	return (
 		<div className={classes.details}>
@@ -40,7 +56,7 @@ const Details = ({ data }) => {
 					</button>
 					<div className={classes.row}>
 						<div className={classes.info}>
-							<Info data={data} />
+							<Info data={data} neighbors={neighbors} />
 						</div>
 					</div>
 				</div>

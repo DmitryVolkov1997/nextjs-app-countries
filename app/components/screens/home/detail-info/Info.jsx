@@ -1,7 +1,8 @@
 import classes from './Info.module.scss'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-const Info = ({ data }) => {
+const Info = ({ data, neighbors = [] }) => {
 	const {
 		name,
 		nativeName,
@@ -15,6 +16,8 @@ const Info = ({ data }) => {
 		languages = [],
 		borders = []
 	} = data
+	
+	const router = useRouter()
 	
 	return (
 		<div className={classes.info}>
@@ -45,8 +48,9 @@ const Info = ({ data }) => {
 					<p className={classes.border__title}>Border Countries:</p>
 					<div className={classes.links}>
 						{
-							borders.length ? borders.map(country => (
-								<span key={country}>{`${country} `}</span>)) : 'There is no border country'
+							neighbors.length ? neighbors.map(country => (
+								<span key={country.name}
+								      onClick={() => router.push(`/country/${country.name}`)}>{`${country.name} `}</span>)) : 'There is no border country'
 						}
 					</div>
 				</div>

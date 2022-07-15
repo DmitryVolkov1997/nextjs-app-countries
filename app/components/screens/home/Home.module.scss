@@ -5,3 +5,7 @@
 .filter {
   @apply pt-28 md:flex md:justify-between
 }
+
+.preloader {
+  @apply w-full flex justify-center mt-24
+}
