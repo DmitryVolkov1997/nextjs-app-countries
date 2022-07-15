@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { ALL_COUNTRIES, filterByCodes } from '../../app/config'
+import { ALL_COUNTRIES, filterByCodes, filterByName } from '../../app/config'
 import classes from './Details.module.scss'
 import Container from '../../app/components/container/Container'
 import { MdOutlineKeyboardBackspace } from 'react-icons/md'
@@ -23,7 +23,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
 	const id = context.params.id
-	const { data } = await axios.get(`https://restcountries.com/v2/name/${id}`)
+	const { data } = await axios.get(filterByName(id))
 	
 	return {
 		props: { data: data[0] }
@@ -35,6 +35,7 @@ const Details = ({ data }) => {
 	const dispatch = useDispatch()
 	const { neighbors } = useSelector(state => state.neighbors)
 	const { borders = [] } = data
+	
 	
 	useEffect(() => {
 		if (borders.length) {

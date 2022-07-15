@@ -7,7 +7,7 @@ const ItemCountry = ({ name, flags, info = [] }) => {
 	
 	return (
 		<div className={classes.card} onClick={()=> router.push(`/country/${name}`)}>
-			<Image className={classes.img} src={flags} width={'320px'} height={'160px'}objectFit={'cover'} objectPosition={'center'} alt={name} />
+			<Image className={classes.img} src={flags} width={'320px'} height={'160px'} objectFit={'cover'} objectPosition={'center'} alt={name} />
 			<div className={classes.info}>
 				<h5 className={classes.title}>{name}</h5>
 				<div className={classes.body}>
