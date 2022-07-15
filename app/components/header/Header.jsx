@@ -11,7 +11,7 @@ const Header = () => {
 					<Link href={'/'}>
 						<a className={classes.logo}>Where in the world</a>
 					</Link>
-					<FaMoon size={25} />
+				<FaMoon size={25} />
 				</div>
 			</Container>
 		</header>

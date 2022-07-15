@@ -1,0 +1,39 @@
+.info {
+  @apply md:flex md:gap-24 md:items-center
+}
+
+.title {
+  @apply text-3xl my-5 font-semibold
+}
+
+.group {
+  @apply md:flex md:gap-20
+}
+
+.list {
+  @apply mb-10;
+
+  & > li {
+    @apply mb-1;
+  }
+
+  & > li > strong {
+    @apply font-semibold;
+  }
+}
+
+.borders {
+  @apply md:flex md:items-center
+}
+
+.border__title {
+  @apply font-semibold md:mr-5
+}
+
+.links {
+  @apply flex flex-wrap gap-3 mt-3 md:mt-0 md:w-1/2;
+
+  & > span {
+    @apply bg-dark-gray py-1 px-5 rounded-sm cursor-pointer shadow shadow-md hover:bg-gray-100 transition
+  }
+}

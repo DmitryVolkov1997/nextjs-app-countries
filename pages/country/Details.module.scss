@@ -1,0 +1,11 @@
+.content {
+  @apply pt-24
+}
+
+.btnBack {
+  @apply bg-dark-gray py-1.5 px-5 flex rounded-sm cursor-pointer shadow shadow-md hover:bg-gray-100 transition mb-10
+}
+
+.icon {
+  @apply mr-2
+}
